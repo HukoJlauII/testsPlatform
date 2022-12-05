@@ -59,6 +59,21 @@
                   </div>
 
                   <form class="row g-3 needs-validation" action="/register" method="post" th:object="${user}">
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleName"  value="ROLE_TEACHER" id="roleName">
+                        <label class="form-check-label" for="roleName">Teacher</label>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="roleName" value="ROLE_STUDENT"  id="roleName">
+                        <label class="form-check-label" for="roleName">Student</label>
+                      </div>
+                    </div>
+
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
                       <input type="text" name="name" class="form-control" id="yourName" th:field="*{name}" required th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'">
@@ -153,7 +168,15 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script>
+    function RAZ911() {
+      var c = document.getElementsByName("role");
+      if (!c[1].checked) {
+        c[1].checked=true;
+      }
+    }
+    RAZ911();
+  </script>
 </body>
 
 </html>

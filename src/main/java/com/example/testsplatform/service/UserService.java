@@ -43,13 +43,13 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void saveUser(User user) {
+    public void saveUser(User user,Role role) {
         User userFromDB = userRepository.findUserByUsername(user.getUsername());
         if (userFromDB != null) {
             return;
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Collections.singleton(Role.ROLE_STUDENT));
+        user.setRoles(Collections.singleton(role));
         user.setRegistrationDate(LocalDate.now());
         save(user);
     }
@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findUserById(userAuth.getId());
     }
 
-    public String validateRegister(User user, BindingResult bindingResult) {
+    public String validateRegister(User user, BindingResult bindingResult, Role role) {
 
         if (!Objects.equals(user.getPassword(), user.getPasswordConfirm())) {
             bindingResult.addError(new FieldError("user", "passwordConfirm", "Пароли не совпадают"));
@@ -74,9 +74,8 @@ public class UserService implements UserDetailsService {
             return "/pages-register";
         }
         try {
-
             user.setRegistrationDate(LocalDate.now());
-            saveUser(user);
+            saveUser(user,role);
             return "redirect:/login";
         } catch (Exception e) {
             return "/pages-register";
