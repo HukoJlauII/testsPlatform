@@ -1,7 +1,9 @@
 let modal = document.querySelector('.modal-body')
 let inputs = modal.querySelectorAll('.form-control')
 let checks = modal.querySelectorAll('.form-check-input')
-let sendButton = document.querySelector('.btn-primary')
+let modalFooter = document.querySelector(".modal-footer")
+let cancelButton = modalFooter.querySelector('.btn-secondary')
+let sendButton = modalFooter.querySelector('.btn-primary')
 sendButton.addEventListener('click', createQuestion)
 console.log(user)
 
@@ -10,7 +12,11 @@ function createQuestion() {
 
     for (let i = 0; i < inputs.length; i++) {
         if (i !== 1 && inputs[i].value === "") {
+            inputs[i].classList.add('is-invalid')
             return
+        }
+        else {
+            inputs[i].classList.add('is-valid')
         }
         if (i > 1) {
             answers.push(inputs[i].value)
@@ -25,56 +31,38 @@ function createQuestion() {
     console.log(rightAnswer)
     let title = inputs[0].value
     let files = inputs[1].files
-    let images = []
-    for (let i = 0; i < files.length; i++) {
-        let image = {
-            originalFileName: files[i].name,
-            size: files[i].size,
-            mediaType: files[i].type,
-            bytes: fileToByte(files[i])
-        }
-        images.push(image)
-    }
     let question = {
         title: title,
         answers: answers,
         rightAnswer: answers[rightAnswer],
-        media: images
     }
+    let formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append("file", files[i]);
+    }
+    formData.append("question", JSON.stringify(question))
 
     console.log(question)
-    var settings = {
-        "url": "http://localhost:8080/question/create",
-        "method": "POST",
-        "timeout": 0,
-        "headers": {
-            "Content-Type": "application/json"
-        },
-        "data": JSON.stringify(question),
-    };
-
-    $.ajax(settings).done(function (response) {
-        cancelButton.click()
-        console.log(response);
-    });
+    // var settings = {
+    //     "url": "http://localhost:8080/question/create",
+    //     "method": "POST",
+    //     "timeout": 0,
+    //     "data": formData,
+    // };
+    //
+    // $.ajax(settings).done(function (response) {
+    //     cancelButton.click()
+    //     console.log(response);
+    // });
+    fetch("http://localhost:8080/question/create", {
+        method: "POST",
+        body: formData,
+    }).then((response) => {
+        let data = response.json().then(async function (value) {
+            console.log(value)
+            return value
+        })
+    })
+    cancelButton.click()
 }
 
-function fileToByte(myFile) {
-    var reader = new FileReader();
-    let fileByteArray=[];
-
-    reader.onloadend = function (evt) {
-        if (evt.target.readyState == FileReader.DONE) {
-            var arrayBuffer = evt.target.result,
-            array = new Uint8Array(arrayBuffer)
-
-            for (var i = 0; i < array.length; i++) {
-                fileByteArray.push(array[i]);
-            }
-        }
-    }
-    reader.readAsArrayBuffer(myFile);
-    let newFileByteArray=new Uint8Array(fileByteArray.buffer)
-    console.log(newFileByteArray)
-    return fileByteArray;
-}

@@ -79,7 +79,7 @@ public class User implements UserDetails {
 
     @OneToOne(targetEntity = Media.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
-//    @JsonIgnoreProperties(value = "bytes", allowSetters = true)
+    @JsonIgnoreProperties(value = "bytes", allowSetters = true)
     @RestResource(exported = false)
     private Media avatar;
 
