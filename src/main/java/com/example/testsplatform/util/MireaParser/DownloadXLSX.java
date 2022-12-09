@@ -1,7 +1,6 @@
 package com.example.testsplatform.util.MireaParser;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
 
 
 import java.io.InputStream;
@@ -11,9 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ParserXML {
+public class DownloadXLSX {
 
     private static final String URL="https://www.mirea.ru/schedule/";
     private static final String PATH = "src/main/java/com/example/testsplatform/util/XLSXFile/";
@@ -30,7 +28,8 @@ public class ParserXML {
             var document = Jsoup.connect(URL).get();
             StringURLXlsx = document.select("a").stream().
                     filter(e -> e.attr("href").
-                            startsWith("https://webservices")).filter(e -> e.attr("href").contains("IIT")).map(e->e.attr("href")).toList();
+                            startsWith("https://webservices")).filter(e -> e.attr("href").
+                            contains("IIT")).map(e->e.attr("href")).toList();
         }catch (Exception e){
             e.printStackTrace();
         }
