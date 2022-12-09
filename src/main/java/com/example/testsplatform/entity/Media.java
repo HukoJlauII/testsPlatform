@@ -1,13 +1,12 @@
 package com.example.testsplatform.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-
+//@JsonIgnoreProperties(value = {"bytes"}, allowSetters = true,allowGetters = true)
 @Entity
 @Table(name = "media", schema = "jpa")
 @Getter
@@ -39,7 +38,7 @@ public class Media {
     private String mediaType;
 
     @Lob
-    @JsonIgnore
+//    @JsonIgnore()
     private byte[] bytes;
 
 }
