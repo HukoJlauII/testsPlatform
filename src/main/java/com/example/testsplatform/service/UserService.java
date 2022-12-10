@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void saveUser(User user,Role role) {
+    public void saveUser(User user, Role role) {
         User userFromDB = userRepository.findUserByUsername(user.getUsername());
         if (userFromDB != null) {
             return;
@@ -75,7 +75,7 @@ public class UserService implements UserDetailsService {
         }
         try {
             user.setRegistrationDate(LocalDate.now());
-            saveUser(user,role);
+            saveUser(user, role);
             return "redirect:/login";
         } catch (Exception e) {
             return "/pages-register";

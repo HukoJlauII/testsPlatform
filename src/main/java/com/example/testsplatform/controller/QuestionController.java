@@ -3,14 +3,11 @@ package com.example.testsplatform.controller;
 import com.example.testsplatform.entity.Media;
 import com.example.testsplatform.entity.Question;
 import com.example.testsplatform.service.QuestionService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.testsplatform.views.QuestionView;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -23,7 +20,7 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping(value = "/create")
-    public Question createQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file",required = false) List<MultipartFile> multipartFile) throws IOException {
+    public Question createQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFile) throws IOException {
         Question question = new ObjectMapper().readValue(jsonString, Question.class);
         if (multipartFile != null) {
             for (MultipartFile file :
@@ -32,5 +29,11 @@ public class QuestionController {
             }
         }
         return questionService.save(question);
+    }
+
+    @JsonView(QuestionView.QuestionPreview.class)
+    @GetMapping("/all")
+    public List<Question> showAllQuestions() {
+        return questionService.findAll();
     }
 }

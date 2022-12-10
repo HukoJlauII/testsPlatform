@@ -1,6 +1,7 @@
 package com.example.testsplatform.configuration;
 
 import com.example.testsplatform.entity.Media;
+import com.example.testsplatform.entity.Question;
 import com.example.testsplatform.entity.User;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -16,6 +17,7 @@ public class RestConfiguration implements RepositoryRestConfigurer {
             RepositoryRestConfiguration config, CorsRegistry cors) {
         config.exposeIdsFor(Media.class);
         config.exposeIdsFor(User.class);
+        config.exposeIdsFor(Question.class);
 
     }
 }

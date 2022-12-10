@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+
 //@JsonIgnoreProperties(value = {"bytes"}, allowSetters = true,allowGetters = true)
 @Entity
 @Table(name = "media", schema = "jpa")

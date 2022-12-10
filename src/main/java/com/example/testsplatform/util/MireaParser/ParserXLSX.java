@@ -1,10 +1,11 @@
 package com.example.testsplatform.util.MireaParser;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -20,6 +21,7 @@ public class ParserXLSX {
     public static void main(String[] args) throws IOException {
         huy();
     }
+
     public static void huy() throws IOException {
 
         try {
@@ -32,17 +34,17 @@ public class ParserXLSX {
             readCells(sheet);
 
         } catch (EncryptedDocumentException | IOException e) {
-             e.printStackTrace();
+            e.printStackTrace();
         } catch (InvalidFormatException e) {
             throw new RuntimeException(e);
         }
 
     }
-    private static void readCells(XSSFSheet sheet)
-    {
+
+    private static void readCells(XSSFSheet sheet) {
         // Определение граничных строк обработки
-        int rowStart = Math.min(  0, sheet.getFirstRowNum());
-        int rowEnd   = Math.max(100, sheet.getLastRowNum ());
+        int rowStart = Math.min(0, sheet.getFirstRowNum());
+        int rowEnd = Math.max(100, sheet.getLastRowNum());
 
         for (int rw = rowStart; rw < rowEnd; rw++) {
             XSSFRow row = sheet.getRow(rw);
@@ -52,7 +54,7 @@ public class ParserXLSX {
             short minCol = row.getFirstCellNum();
             short maxCol = row.getLastCellNum();
 
-            for(short col = minCol; col < 5; col++) {
+            for (short col = minCol; col < 5; col++) {
                 XSSFCell cell = row.getCell(col);
                 if (cell == null) {
                     continue;
@@ -61,14 +63,14 @@ public class ParserXLSX {
             }
         }
     }
-    private static void printCell(XSSFRow row, XSSFCell cell)
-    {
+
+    private static void printCell(XSSFRow row, XSSFCell cell) {
         DataFormatter formatter = new DataFormatter();
         CellReference cellRef = new CellReference(row.getRowNum(),
                 cell.getColumnIndex());
         String text = formatter.formatCellValue(cell);
 
-        if(!text.equals("")) {
+        if (!text.equals("")) {
             System.out.print(cellRef.formatAsString());
             System.out.print(" : ");
             System.out.print(text);
@@ -96,7 +98,6 @@ public class ParserXLSX {
                 break;
         }
     }
-
 
 
 }

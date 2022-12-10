@@ -30,7 +30,7 @@ public class RegisterController {
         if (bindingResult.hasErrors()) {
             return "/pages-register";
         }
-        return userService.validateRegister(user, bindingResult,role);
+        return userService.validateRegister(user, bindingResult, role);
 
     }
 
