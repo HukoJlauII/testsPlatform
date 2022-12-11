@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,9 @@ public class DownloadXLSX {
         List<URL> url = convertStringToURL();
         for (int i = 0; i < convertStringToURL().size()-6; i++) {
             try (InputStream in = url.get(i).openStream()) {
-                Files.copy(in, Paths.get(PATH+Integer.valueOf(i+1)+".xlsx"));
+                Files.copy(in, Paths.get(PATH+Integer.valueOf(i+1)+".xlsx"), StandardCopyOption.REPLACE_EXISTING);
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }
