@@ -14,20 +14,23 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class ParserXLSX {
+@Component
+@Order(3)
+public class ParserXLSX implements CommandLineRunner {
 
     public static Map<String, Map<Integer, ArrayList<ArrayList<Map<String, String>>>>> groups = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
-        huy();
-    }
-    public static void huy() throws IOException {
-
+    public void huy() throws IOException {
         try {
 //            FileInputStream fis = new FileInputStream("src/main/java/com/example/testsplatform/util/XLSXFile/1.xlsx");
 
@@ -114,5 +117,8 @@ public class ParserXLSX {
     }
 
 
-
+    @Override
+    public void run(String... args) throws Exception {
+        huy();
+    }
 }
