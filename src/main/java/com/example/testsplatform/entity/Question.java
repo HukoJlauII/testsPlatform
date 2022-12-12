@@ -20,7 +20,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-
 public class Question {
 
     @JsonView(QuestionView.QuestionPreview.class)
@@ -34,7 +33,7 @@ public class Question {
     private String title;
 
     @JsonView(QuestionView.FullQuestion.class)
-    @RestResource(exported = false)
+    @RestResource(exported = false,path = "media",rel = "media")
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "question_media",
             joinColumns = {@JoinColumn(name = "question_id")},

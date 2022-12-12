@@ -9,6 +9,9 @@ let showQuestionButton = document.querySelector('#showQuestion')
 let questionsMedia = document.querySelector('.carousel-inner')
 showQuestionButton.addEventListener('click', showAllQuestions)
 let questionArea = document.querySelector('#questions')
+let changeQuestionArea = document.querySelector('#changeQuestion')
+let editQuestionButton = changeQuestionArea.querySelector('.btn-secondary')
+let deleteQuestionButton = changeQuestionArea.querySelector('.btn-danger')
 
 function createQuestion() {
     let answers = []
@@ -45,17 +48,6 @@ function createQuestion() {
     formData.append("question", JSON.stringify(question))
 
     console.log(question)
-    // var settings = {
-    //     "url": "http://localhost:8080/question/create",
-    //     "method": "POST",
-    //     "timeout": 0,
-    //     "data": formData,
-    // };
-    //
-    // $.ajax(settings).done(function (response) {
-    //     cancelButton.click()
-    //     console.log(response);
-    // });
     fetch("http://localhost:8080/question/create", {
         method: "POST",
         body: formData,
@@ -76,8 +68,11 @@ function showAllQuestions() {
     };
 
     $.ajax(settings).done(function (response) {
+        questionSelect.innerHTML=''
         questionArea.style.display = 'block'
         console.log(response);
+        editQuestionButton.style.display = 'none'
+        deleteQuestionButton.style.display = 'none'
         let questionSelect = questionArea.querySelector('.form-select')
         for (let i = 0; i < response.length; i++) {
             let questionOption = document.createElement('option')
@@ -94,39 +89,197 @@ function showAllQuestions() {
                     "timeout": 0,
                 };
                 $.ajax(settings).done(function (response) {
-                    questionsMedia.innerHTML = ''
-                    let anwersList = questionArea.querySelector('.list-group')
-                    anwersList.innerHTML = ''
-                    console.log(response)
-                    let title = questionArea.querySelector('.question-title')
-                    title.innerHTML = response.title
-                    let media = response.media
-                    for (let i = 0; i < media.length; i++) {
-                        let image = document.createElement('div')
-                        image.classList.add("carousel-item")
-                        if (i === 0) {
-                            image.classList.add("active")
-                        }
-                        image.innerHTML = "<img src=\"/image/" + media[i].id + "\" class=\"d-block w-100\" alt=\"...\">"
-                        questionsMedia.appendChild(image)
-                    }
-                    let answers = response.answers
-                    for (let i = 0; i < answers.length; i++) {
-                        let answer = document.createElement('li')
-                        answer.classList.add("list-group-item")
-                        if (answers[i] === response.rightAnswer) {
-                            answer.innerHTML = "<i class=\"bi bi-check me-1 text-success\"></i> " + answers[i]
-                        } else {
-                            answer.innerHTML = "<i class=\"bi bi-x-circle me-1 text-danger\"></i> " + answers[i]
-                        }
-                        anwersList.appendChild(answer)
-                    }
+                    showQuestionPreview(response)
                 });
+                editQuestionButton.style.display = 'block'
+                deleteQuestionButton.style.display = 'block'
+            } else {
+                editQuestionButton.style.display = 'none'
+                deleteQuestionButton.style.display = 'none'
             }
         })
     });
 }
 
-//<div class="carousel-item active">
-//                                                 <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
-//                                             </div>
+function showEditForm(response) {
+    let editQuestionArea = document.querySelector('#editQuestion')
+    let submitEditButton = editQuestionArea.querySelector('.btn-primary')
+    let files=editQuestionArea.querySelector('#formFile1').value=null
+    let oldButton = submitEditButton
+    let parentButton = submitEditButton.parentNode
+    submitEditButton = submitEditButton.cloneNode()
+    submitEditButton.innerHTML = oldButton.innerHTML
+    parentButton.removeChild(oldButton)
+    parentButton.appendChild(submitEditButton)
+    let body = editQuestionArea.querySelector('.modal-body')
+    let title = body.querySelector('textarea')
+    title.value = response.title
+    console.log(response)
+    let answers = body.querySelectorAll('.text')
+    let checks = body.querySelectorAll('.check')
+    document.querySelector('#editPhotos').innerHTML = ''
+    for (let i = 0; i < response.media.length; i++) {
+        let media = document.createElement('div')
+        media.classList.add("col-xxl-3", "col-md-4")
+        media.innerHTML = "                                                <div class=\"card info-card sales-card\">\n" +
+            "\n" +
+            "                                                    <div class=\"filter\">\n" +
+            "                                                        <a class=\"icon\" href=\"#\"><i class=\"bi bi-trash\"></i></a>\n" +
+            "                                                    </div>\n" +
+            "\n" +
+            "                                                    <div class=\"card-body\">\n" +
+            "                                                        <h5 class=\"card-title\">" + response.media[i].originalFileName.substring(0, 8) + "...</span></h5>\n" +
+            "                                                        <div class=\"d-flex align-items-center justify-content-around\">\n" +
+            "                                                            <div class=\"card-icon  d-flex align-items-center justify-content-center\">\n" +
+            "                                                                <img src=\"/image/" + response.media[i].id + "\" alt=\"Profile\" class=\"w-100 h-100\">\n" +
+            "                                                            </div>\n" +
+            "                                                        </div>\n" +
+            "                                                    </div>\n" +
+            "\n" +
+            "                                                </div>\n"
+        media.querySelector('.bi-trash').addEventListener('click', function () {
+            var settings = {
+                "url": "http://localhost:8080/media/" + response.media[i].id,
+                "method": "DELETE",
+                "timeout": 0,
+            };
+            $.ajax(settings).done(function (response) {
+                media.parentNode.removeChild(media)
+            })
+        })
+        document.querySelector('#editPhotos').appendChild(media)
+    }
+    for (let i = 0; i < answers.length; i++) {
+        answers[i].value = response.answers[i]
+        if (response.answers[i] === response.rightAnswer) {
+            checks[i].checked = true
+        }
+    }
+    submitEditButton.addEventListener('click', function () {
+        editQuestion(response)
+    })
+
+}
+
+function editQuestion(question) {
+    let editQuestionArea = document.querySelector('#editQuestion')
+    let body = editQuestionArea.querySelector('.modal-body')
+    let title = body.querySelector('textarea')
+    let answersIn = body.querySelectorAll('.text')
+    let checks = body.querySelectorAll('.check')
+    let rightAnswer
+    let answers = []
+
+    for (let i = 0; i < answersIn.length; i++) {
+        if (answersIn[i].value === "") {
+            answersIn[i].classList.remove('is-valid')
+            answersIn[i].classList.add('is-invalid')
+            return
+        } else {
+            answersIn[i].classList.add('is-valid')
+            answersIn[i].classList.remove('is-invalid')
+        }
+        console.log(answersIn[i].value)
+        answers.push(answersIn[i].value)
+        if (checks[i].checked) {
+            rightAnswer = i
+        }
+    }
+    let newQuestion = {
+        id: question.id,
+        title: title.value,
+        answers: answers,
+        rightAnswer: answers[rightAnswer],
+    }
+    let files = document.querySelector('#formFile1').files
+    let formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append("file", files[i]);
+    }
+    formData.append("question", JSON.stringify(newQuestion))
+
+    console.log(newQuestion)
+    console.log(files)
+
+    fetch("http://localhost:8080/question/change", {
+        method: "PUT",
+        body: formData,
+    }).then((response) => {
+        let data = response.json().then(async function (value) {
+            showQuestionPreview(value)
+            return value
+        })
+        console.log(data)
+    })
+    editQuestionArea.querySelector('.btn-secondary').click()
+}
+
+function deleteQuestion(response) {
+    var settings = {
+        "url": "http://localhost:8080/questions/" + response.id,
+        "method": "DELETE",
+        "timeout": 0,
+    };
+    $.ajax(settings).done(function (response) {
+        let questionSelect = questionArea.querySelector('.form-select')
+        questionSelect.options[0].selected = 'selected'
+        questionsMedia.innerHTML = ''
+        let answersList = questionArea.querySelector('.list-group')
+        answersList.innerHTML = ''
+        let title = questionArea.querySelector('.question-title')
+        title.innerHTML = ''
+        editQuestionButton.style.display = 'none'
+        deleteQuestionButton.style.display = 'none'
+    })
+}
+
+function showQuestionPreview(response) {
+    removeListenersFromButtons()
+    questionsMedia.innerHTML = ''
+    let answersList = questionArea.querySelector('.list-group')
+    answersList.innerHTML = ''
+    console.log(response)
+    let title = questionArea.querySelector('.question-title')
+    title.innerHTML = response.title
+    let media = response.media
+    for (let i = 0; i < media.length; i++) {
+        let image = document.createElement('div')
+        image.classList.add("carousel-item")
+        if (i === 0) {
+            image.classList.add("active")
+        }
+        image.innerHTML = "<img src=\"/image/" + media[i].id + "\" class=\"d-block w-100\" alt=\"...\">"
+        questionsMedia.appendChild(image)
+    }
+    let answers = response.answers
+    for (let i = 0; i < answers.length; i++) {
+        let answer = document.createElement('li')
+        answer.classList.add("list-group-item")
+        if (answers[i] === response.rightAnswer) {
+            answer.innerHTML = "<i class=\"bi bi-check me-1 text-success\"></i> " + answers[i]
+        } else {
+            answer.innerHTML = "<i class=\"bi bi-x-circle me-1 text-danger\"></i> " + answers[i]
+        }
+        answersList.appendChild(answer)
+    }
+    editQuestionButton.addEventListener('click', function () {
+        showEditForm(response)
+    })
+    deleteQuestionButton.addEventListener('click', function () {
+        console.log('del')
+        deleteQuestion(response)
+    })
+}
+
+function removeListenersFromButtons() {
+    let oldEQB = editQuestionButton
+    let oldDQB = deleteQuestionButton
+    let buttonParent = editQuestionButton.parentNode
+    buttonParent.innerHTML = ''
+    editQuestionButton = editQuestionButton.cloneNode()
+    deleteQuestionButton = deleteQuestionButton.cloneNode()
+    editQuestionButton.innerHTML = oldEQB.innerHTML
+    deleteQuestionButton.innerHTML = oldDQB.innerHTML
+    buttonParent.appendChild(editQuestionButton)
+    buttonParent.appendChild(deleteQuestionButton)
+}

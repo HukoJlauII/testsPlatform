@@ -20,15 +20,15 @@ public class QuestionController {
     private QuestionService questionService;
 
     @PostMapping(value = "/create")
-    public Question createQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFile) throws IOException {
+    public Question createQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) throws IOException {
         Question question = new ObjectMapper().readValue(jsonString, Question.class);
-        if (multipartFile != null) {
-            for (MultipartFile file :
-                    multipartFile) {
-                question.getMedia().add(new Media(file.getOriginalFilename(), file.getSize(), file.getContentType(), file.getBytes()));
-            }
-        }
-        return questionService.save(question);
+        return questionService.createQuestion(question,multipartFiles);
+    }
+
+    @PutMapping(value = "/change")
+    public Question changeQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) throws IOException {
+        Question question = new ObjectMapper().readValue(jsonString, Question.class);
+        return questionService.updateQuestion(question,multipartFiles);
     }
 
     @JsonView(QuestionView.QuestionPreview.class)
