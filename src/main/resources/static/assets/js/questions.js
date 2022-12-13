@@ -238,6 +238,7 @@ function deleteQuestion(response) {
     };
     $.ajax(settings).done(function (response) {
         let questionSelect = questionArea.querySelector('.form-select')
+        questionSelect.options[questionSelect.selectedIndex].parentNode.removeChild(questionSelect.options[questionSelect.selectedIndex])
         questionSelect.options[0].selected = 'selected'
         questionsMedia.innerHTML = ''
         let answersList = questionArea.querySelector('.list-group')

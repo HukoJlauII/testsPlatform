@@ -38,7 +38,7 @@ function successFindGroup(data) {
             div.removeChild(div.firstChild);
         }
     }
-    for (let i = 0; i <= data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         const table = document.createElement("tr");
         let code = "";
         i++;

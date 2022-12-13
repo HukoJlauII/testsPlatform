@@ -13,5 +13,10 @@ public interface TestRepository extends JpaRepository<Test, Long> {
     @Query("select t from Test t join t.questions q where ?1 in q")
     List<Test> findByQuestionInTest(Question question);
 
+    @Query("select t from Test t where t.previousTest = ?1")
+    List<Test> findByPreviousTest(Test previousTest);
+
+
+
 
 }

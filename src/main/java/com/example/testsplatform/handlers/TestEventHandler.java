@@ -1,6 +1,5 @@
 package com.example.testsplatform.handlers;
 
-import com.example.testsplatform.entity.Question;
 import com.example.testsplatform.entity.Test;
 import com.example.testsplatform.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,20 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
 import java.util.List;
 
-@RepositoryEventHandler(Question.class)
-public class QuestionEventHandler {
+@RepositoryEventHandler(Test.class)
+public class TestEventHandler {
     @Autowired
     private TestService testService;
 
     @HandleBeforeDelete
-    public void handleAuthorBeforeDelete(Question question) {
-        List<Test> tests = testService.findByQuestionInTest(question);
-        tests.forEach(test -> test.getQuestions().remove(question));
-        testService.saveAll(tests);
+    public void changePreviousTest(Test test) {
+
+            List<Test> tests = testService.findByPreviousTest(test);
+            tests.forEach(t -> {
+                t.setPreviousTest(test.getPreviousTest());
+            });
+            testService.saveAll(tests);
+
     }
+
 }

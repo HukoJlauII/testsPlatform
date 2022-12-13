@@ -25,4 +25,7 @@ public class TestService {
     public List<Test> findByQuestionInTest(Question question) {
         return testRepository.findByQuestionInTest(question);
     }
+    public List<Test> findByPreviousTest(Test previousTest){
+        return testRepository.findByPreviousTest(previousTest);
+    }
 }

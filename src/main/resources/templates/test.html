@@ -199,7 +199,7 @@
                         <div class="card info-card customers-card" id="questionArea">
 
                             <div class="card-body">
-                                <h5 class="card-title mb-3">Пример заголовка теста</h5>
+                                <h5 class="card-title mb-3">Пример заголовка вопроса</h5>
                                 <div class="row justify-content-around singleQuestion">
 
                                     <div id="carouselExampleControls" class="carousel slide col-6 mb-3"
@@ -266,92 +266,19 @@
                         </div>
                     </div>
 
-                    <div class="modal fade" id="editQuestion" tabindex="-1" aria-hidden="true"
-                         style="display: none;">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal fade" id="deleteConfirm" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Форма изменения вопроса</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                    <h5 class="modal-title">Подтвердите удаление</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form enctype="multipart/form-data">
-                                        <div class="row mb-3 align-items-center">
-                                            <label class="col-sm-2 col-form-label">Текст вопроса</label>
-                                            <div class="col-sm-10">
-                                                                <textarea class="form-control"
-                                                                          style="height: 100px"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 align-items-center">
-                                            <label class="col-sm-2 col-form-label">Загрузить
-                                                картинки</label>
-                                            <div class="col-sm-10">
-                                                <input class="form-control" type="file" name="formFile1"
-                                                       id="formFile1"
-                                                       accept="image/*" multiple>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 align-items-center" id="editPhotos">
-
-                                        </div>
-
-                                        <div class="row mb-3 align-items-center justify-content-between">
-                                            <label class="col-sm-2 col-form-label">Вариант 1</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text">
-                                            </div>
-                                            <div class=" col-sm-1">
-                                                <input class="form-check-input check" type="radio"
-                                                       name="gridRadios" id="gridRadios11"
-                                                       value="option1">
-
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 align-items-center justify-content-between">
-                                            <label class="col-sm-2 col-form-label">Вариант 2</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text">
-                                            </div>
-                                            <div class=" col-sm-1">
-                                                <input class="form-check-input check" type="radio"
-                                                       name="gridRadios" id="gridRadios21"
-                                                       value="option1">
-
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 align-items-center justify-content-between">
-                                            <label class="col-sm-2 col-form-label">Вариант 3</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text">
-                                            </div>
-                                            <div class=" col-sm-1">
-                                                <input class="form-check-input check" type="radio"
-                                                       name="gridRadios" id="gridRadios31"
-                                                       value="option1">
-
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3 align-items-center justify-content-between">
-                                            <label class="col-sm-2 col-form-label">Вариант 4</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control text">
-                                            </div>
-                                            <div class=" col-sm-1">
-                                                <input class="form-check-input check" type="radio"
-                                                       name="gridRadios" id="gridRadios41"
-                                                       value="option1">
-
-                                            </div>
-                                        </div>
-                                    </form>
+                                    Вы уверены, что хотите удалить тест?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Отмена
-                                    </button>
-                                    <button type="button" class="btn btn-primary">Сохранить изменения</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                                    <button type="button" class="btn btn-danger">Удалить</button>
                                 </div>
                             </div>
                         </div>

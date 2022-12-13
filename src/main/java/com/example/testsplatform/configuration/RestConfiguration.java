@@ -6,6 +6,7 @@ import com.example.testsplatform.entity.Test;
 import com.example.testsplatform.entity.User;
 import com.example.testsplatform.handlers.MediaEventHandler;
 import com.example.testsplatform.handlers.QuestionEventHandler;
+import com.example.testsplatform.handlers.TestEventHandler;
 import com.example.testsplatform.views.QuestionProjection;
 import com.example.testsplatform.views.TestProjection;
 import com.example.testsplatform.views.TestWithQuestionProjection;
@@ -28,6 +29,11 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         return new QuestionEventHandler();
     }
 
+    @Bean
+    TestEventHandler testEventHandler() {
+        return new TestEventHandler();
+    }
+
     @Override
     public void configureRepositoryRestConfiguration(
             RepositoryRestConfiguration config, CorsRegistry cors) {
@@ -37,6 +43,5 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(Question.class);
         config.getProjectionConfiguration().addProjection(QuestionProjection.class);
         config.getProjectionConfiguration().addProjection(TestProjection.class).addProjection(TestWithQuestionProjection.class);
-
     }
 }

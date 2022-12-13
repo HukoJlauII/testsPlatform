@@ -34,8 +34,7 @@ public class Test {
             inverseJoinColumns = {@JoinColumn(name = "question_id")})
     private Set<Question> questions = new HashSet<>();
 
-
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY,orphanRemoval = false,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Test previousTest;
 
 }
