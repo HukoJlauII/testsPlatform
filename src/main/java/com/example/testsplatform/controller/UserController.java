@@ -25,6 +25,12 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping("/tests")
+    public String showTestPage(Model model) {
+        model.addAttribute("user", userService.getUserAuth());
+        return "test";
+    }
+
     @GetMapping("/profile")
     public String showProfile(Model model) {
         model.addAttribute("user", userService.getUserAuth());

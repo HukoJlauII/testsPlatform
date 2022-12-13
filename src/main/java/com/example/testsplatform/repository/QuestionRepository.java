@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query("select q from Question q join q.media m where m = ?1")
     Question findQuestionByImageInMedia(Media media);
+
 }

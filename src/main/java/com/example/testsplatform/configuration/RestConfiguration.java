@@ -2,8 +2,11 @@ package com.example.testsplatform.configuration;
 
 import com.example.testsplatform.entity.Media;
 import com.example.testsplatform.entity.Question;
+import com.example.testsplatform.entity.Test;
 import com.example.testsplatform.entity.User;
 import com.example.testsplatform.handlers.MediaEventHandler;
+import com.example.testsplatform.handlers.QuestionEventHandler;
+import com.example.testsplatform.views.QuestionProjection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -18,12 +21,19 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         return new MediaEventHandler();
     }
 
+    @Bean
+    QuestionEventHandler questionEventHandler() {
+        return new QuestionEventHandler();
+    }
+
     @Override
     public void configureRepositoryRestConfiguration(
             RepositoryRestConfiguration config, CorsRegistry cors) {
         config.exposeIdsFor(Media.class);
         config.exposeIdsFor(User.class);
+        config.exposeIdsFor(Test.class);
         config.exposeIdsFor(Question.class);
+        config.getProjectionConfiguration().addProjection(QuestionProjection.class);
 
     }
 }

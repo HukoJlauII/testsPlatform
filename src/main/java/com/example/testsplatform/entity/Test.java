@@ -1,11 +1,14 @@
 package com.example.testsplatform.entity;
 
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tests", schema = "jpa")
@@ -22,13 +25,15 @@ public class Test {
 
     private String title;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    //    @RestResource(exported = false)
+    @ManyToMany(targetEntity = Question.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "test_question",
             joinColumns = {@JoinColumn(name = "test_id")},
             inverseJoinColumns = {@JoinColumn(name = "question_id")})
-    private List<Question> questions = new ArrayList<>();
+    private Set<Question> questions = new HashSet<>();
 
 
     @OneToOne(fetch = FetchType.EAGER)
     private Test previousTest;
+
 }

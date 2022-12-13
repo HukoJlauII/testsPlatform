@@ -15,7 +15,7 @@ public class MediaEventHandler {
 
     @HandleBeforeDelete
     public void handleAuthorBeforeDelete(Media media) {
-        Question question=questionService.findQuestionByImageInMedia(media);
+        Question question = questionService.findQuestionByImageInMedia(media);
         question.getMedia().remove(media);
         questionService.save(question);
     }

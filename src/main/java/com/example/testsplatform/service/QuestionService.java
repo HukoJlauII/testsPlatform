@@ -25,8 +25,7 @@ public class QuestionService {
         return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
     }
 
-    public Question findQuestionByImageInMedia(Media media)
-    {
+    public Question findQuestionByImageInMedia(Media media) {
         return questionRepository.findQuestionByImageInMedia(media);
     }
 
@@ -39,12 +38,10 @@ public class QuestionService {
         }
         return save(question);
     }
+
     public Question updateQuestion(Question question, List<MultipartFile> multipartFiles) throws IOException {
-        Question questionFromDB=questionRepository.findById(question.getId()).orElse(null);
-        if (questionFromDB!=null) {
-//            questionFromDB.setTitle(question.getTitle());
-//            questionFromDB.setAnswers(question.getAnswers());
-//            questionFromDB.setRightAnswer(question.getRightAnswer());
+        Question questionFromDB = questionRepository.findById(question.getId()).orElse(null);
+        if (questionFromDB != null) {
             question.setMedia(questionFromDB.getMedia());
             if (multipartFiles != null) {
                 for (MultipartFile file :
@@ -53,6 +50,6 @@ public class QuestionService {
                 }
             }
             return save(question);
-        }else return null;
+        } else return null;
     }
 }

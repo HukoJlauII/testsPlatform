@@ -3,26 +3,24 @@ package com.example.testsplatform.util.MireaParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minidev.json.JSONObject;
-import netscape.javascript.JSObject;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @Order(3)
@@ -40,6 +38,7 @@ public class ParserXLSX implements CommandLineRunner {
                 XSSFWorkbook book = new XSSFWorkbook(pkg);
                 XSSFSheet sheet = book.getSheetAt(0);
                 readCells(sheet);
+                book.close();
             }
 
             JSONObject object = new JSONObject(groups);
@@ -49,25 +48,26 @@ public class ParserXLSX implements CommandLineRunner {
             }
 
         } catch (EncryptedDocumentException | IOException e) {
-             e.printStackTrace();
+            e.printStackTrace();
         } catch (InvalidFormatException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    static ArrayList<ArrayList<Map<String, String>>> constructWeek(){
+    static ArrayList<ArrayList<Map<String, String>>> constructWeek() {
         ArrayList<ArrayList<Map<String, String>>> elem = new ArrayList<>(6);
         for (int i = 0; i < 6; i++)
             elem.add(new ArrayList<>(7));
         return elem;
     }
+
     private static void readCells(XSSFSheet sheet) throws IOException {
 
 
         short maxCol = sheet.getRow(0).getLastCellNum();
 
-        for(int col = 5; col < maxCol ; col = col + 5) {
+        for (int col = 5; col < maxCol; col = col + 5) {
 
             Map<Integer, ArrayList<ArrayList<Map<String, String>>>> week = new HashMap<>();
             week.put(1, constructWeek());
@@ -76,10 +76,9 @@ public class ParserXLSX implements CommandLineRunner {
             // Встретился день недели
             if (col % 15 == 0)
                 continue;
-            System.out.println();
             String groupName = printCell(sheet.getRow(1).getCell(col));
 
-            for (int rw = 3; rw < 85; rw ++) {
+            for (int rw = 3; rw < 85; rw++) {
                 XSSFCell cell = sheet.getRow(rw).getCell(col);
                 XSSFCell cell2 = sheet.getRow(rw).getCell(col + 1);
                 XSSFCell cell3 = sheet.getRow(rw).getCell(col + 2);
@@ -95,7 +94,8 @@ public class ParserXLSX implements CommandLineRunner {
             groups.put(groupName, week);
         }
     }
-    private static String printCell(XSSFCell cell){
+
+    private static String printCell(XSSFCell cell) {
 
         // Вывод значения в консоль
         switch (cell.getCellType()) {

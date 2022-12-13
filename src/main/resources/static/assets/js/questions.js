@@ -1,7 +1,8 @@
-let modal = document.querySelector('.modal-body')
+let createQuestionModal=document.querySelector('#largeModal')
+let modal = createQuestionModal.querySelector('.modal-body')
 let inputs = modal.querySelectorAll('.form-control')
 let checks = modal.querySelectorAll('.form-check-input')
-let modalFooter = document.querySelector(".modal-footer")
+let modalFooter = createQuestionModal.querySelector(".modal-footer")
 let cancelButton = modalFooter.querySelector('.btn-secondary')
 let sendButton = modalFooter.querySelector('.btn-primary')
 sendButton.addEventListener('click', createQuestion)
@@ -19,9 +20,11 @@ function createQuestion() {
     for (let i = 0; i < inputs.length; i++) {
         if (i !== 1 && inputs[i].value === "") {
             inputs[i].classList.add('is-invalid')
+            inputs[i].classList.remove('is-valid')
             return
         } else {
             inputs[i].classList.add('is-valid')
+            inputs[i].classList.remove('is-invalid')
         }
         if (i > 1) {
             answers.push(inputs[i].value)
@@ -57,6 +60,18 @@ function createQuestion() {
             return value
         })
     })
+    for (let i = 0; i < inputs.length; i++) {
+        if (i===1)
+        {
+            inputs[i].value=null
+        }
+        else
+        {
+            inputs[i].value=''
+        }
+        inputs[i].classList.remove('is-invalid','is-valid')
+    }
+    checks[0].checked=true
     cancelButton.click()
 }
 
@@ -68,12 +83,13 @@ function showAllQuestions() {
     };
 
     $.ajax(settings).done(function (response) {
-        questionSelect.innerHTML=''
         questionArea.style.display = 'block'
         console.log(response);
         editQuestionButton.style.display = 'none'
         deleteQuestionButton.style.display = 'none'
         let questionSelect = questionArea.querySelector('.form-select')
+        questionSelect.innerHTML = "<option value=\"0\" selected>Выберите вопрос</option>"
+        console.log(questionSelect)
         for (let i = 0; i < response.length; i++) {
             let questionOption = document.createElement('option')
             questionOption.innerHTML = response[i].title
@@ -82,6 +98,7 @@ function showAllQuestions() {
         }
         questionSelect.addEventListener('change', function () {
             let selectedOption = questionSelect.options[questionSelect.selectedIndex]
+
             if (selectedOption.value !== "0") {
                 var settings = {
                     "url": "http://localhost:8080/questions/" + selectedOption.value,
@@ -104,7 +121,7 @@ function showAllQuestions() {
 function showEditForm(response) {
     let editQuestionArea = document.querySelector('#editQuestion')
     let submitEditButton = editQuestionArea.querySelector('.btn-primary')
-    let files=editQuestionArea.querySelector('#formFile1').value=null
+    editQuestionArea.querySelector('#formFile1').value = null
     let oldButton = submitEditButton
     let parentButton = submitEditButton.parentNode
     submitEditButton = submitEditButton.cloneNode()
@@ -114,7 +131,6 @@ function showEditForm(response) {
     let body = editQuestionArea.querySelector('.modal-body')
     let title = body.querySelector('textarea')
     title.value = response.title
-    console.log(response)
     let answers = body.querySelectorAll('.text')
     let checks = body.querySelectorAll('.check')
     document.querySelector('#editPhotos').innerHTML = ''

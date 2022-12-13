@@ -55,7 +55,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="." class="logo d-flex align-items-center">
+        <a href="/" class="logo d-flex align-items-center">
             <img src="assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">MyTest</span>
         </a>
@@ -138,7 +138,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="/">
+            <a class="nav-link collapsed" href="/">
                 <i class="bi bi-grid"></i>
                 <span>Главная</span>
             </a>
@@ -152,7 +152,7 @@
         </li>
 
         <li sec:authorize="hasRole('ROLE_TEACHER')" class="nav-item">
-            <a class="nav-link collapsed" href="/test">
+            <a class="nav-link " href="/test">
                 <i class="bi bi-card-checklist"></i>
                 <span>Тесты</span>
             </a>
@@ -167,7 +167,7 @@
         <h1>Панель инструментов</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href=".">Главная</a></li>
+                <li class="breadcrumb-item"><a href="/">Главная</a></li>
                 <li class="breadcrumb-item active">Тесты</li>
             </ol>
         </nav>

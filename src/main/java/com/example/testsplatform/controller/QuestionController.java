@@ -1,6 +1,5 @@
 package com.example.testsplatform.controller;
 
-import com.example.testsplatform.entity.Media;
 import com.example.testsplatform.entity.Question;
 import com.example.testsplatform.service.QuestionService;
 import com.example.testsplatform.views.QuestionView;
@@ -22,13 +21,14 @@ public class QuestionController {
     @PostMapping(value = "/create")
     public Question createQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) throws IOException {
         Question question = new ObjectMapper().readValue(jsonString, Question.class);
-        return questionService.createQuestion(question,multipartFiles);
+        return questionService.createQuestion(question, multipartFiles);
     }
+
 
     @PutMapping(value = "/change")
     public Question changeQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) throws IOException {
         Question question = new ObjectMapper().readValue(jsonString, Question.class);
-        return questionService.updateQuestion(question,multipartFiles);
+        return questionService.updateQuestion(question, multipartFiles);
     }
 
     @JsonView(QuestionView.QuestionPreview.class)
