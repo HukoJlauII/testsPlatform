@@ -25,8 +25,10 @@ public class Test {
 
     private String title;
 
+
+
     //    @RestResource(exported = false)
-    @ManyToMany(targetEntity = Question.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Question.class, fetch = FetchType.LAZY)
     @JoinTable(name = "test_question",
             joinColumns = {@JoinColumn(name = "test_id")},
             inverseJoinColumns = {@JoinColumn(name = "question_id")})

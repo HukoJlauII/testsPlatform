@@ -369,56 +369,98 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Все вопросы</h5>
-                                <img src="assets/img/card.jpg" class="card-img-top mb-2" alt="...">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <div class="row mb-3 align-items-center">
+                                    <label class="col-sm-4 col-form-label">Выберите вопрос для предпросмотра</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option value="0" selected>Выберите вопрос</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="singleQuestion">
+                                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+
+                                            <div class="carousel-item active">
+                                                <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="assets/img/slides-3.jpg" class="d-block w-100" alt="...">
+                                            </div>
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button"
+                                                data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                                data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+
+                                    </div>
+                                    <h5 class="card-title question-title">Пример заголовка вопроса</h5>
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i> Ответ 1
+                                        </li>
+                                        <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>
+                                            Ответ 2
+                                        </li>
+                                        <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>
+                                            Ответ 3
+                                        </li>
+                                        <li class="list-group-item"><i
+                                                class="bi bi-exclamation-octagon me-1 text-warning"></i> Ответ 4
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex justify-content-between" id="changeQuestion">
+                                        <button type="button" class="btn btn-secondary " data-bs-toggle="modal"
+                                                data-bs-target="#editQuestion">Изменить вопрос
+                                        </button>
+                                        <button type="button" class="btn btn-danger ">Удалить вопрос</button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
-                    </div><!-- End Reports -->
-
+                    </div>
                     <!-- Recent Sales -->
                     <div class="col-12">
                         <div class="card recent-sales overflow-auto">
 
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
                             <div class="card-body">
-                                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                                <h5 class="card-title">Расписание <span></span></h5>
 
-                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    <div class="dataTable-top">
-                                        <div class="dataTable-dropdown">
-                                            <label>
-                                                <select id="day" class="dataTable-selector">
-                                                    <option value="0" selected="">Пн</option>
-                                                    <option value="1">Вт</option>
-                                                    <option value="2">Ср</option>
-                                                    <option value="3">Чт</option>
-                                                    <option value="4">Пт</option>
-                                                    <option value="5">Сб</option>
-                                                </select> день
-                                            </label>
-                                            <label>
-                                                <select id="week" class="dataTable-selector">
-                                                    <option value="0" selected="">Чет</option>
-                                                    <option value="1">Нечет</option>
-                                                </select> неделя
-                                            </label>
+                                <div class="dataTable-wrapper dataTable-loading no-footer searchable fixed-columns">
+                                    <div class="dataTable-top row g-3 mb-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <label for="day" class="form-label">День недели</label>
+                                            <select id="day" class="dataTable-selector">
+                                                <option value="0" selected="">Пн</option>
+                                                <option value="1">Вт</option>
+                                                <option value="2">Ср</option>
+                                                <option value="3">Чт</option>
+                                                <option value="4">Пт</option>
+                                                <option value="5">Сб</option>
+                                            </select>
                                         </div>
-                                        <div class="dataTable-search"><input class="dataTable-input"
-                                                                             placeholder="Искать группу XXXX-XX-XX" type="text"></div>
-                                        <button id="searchTimeTable">Найти</button>
+                                        <div class="col-md-2">
+                                            <label for="week" class="form-label">Неделя</label>
+                                            <select id="week" class="dataTable-selector">
+                                                <option value="0" selected="">Чет</option>
+                                                <option value="1">Нечет</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="dataTable-input"
+                                                                                 placeholder="Искать группу XXXX-XX-XX"
+                                                                                 type="text">
+                                            <button id="searchTimeTable"  class="btn btn-dark"><i class="bi bi-search"></i></button>
+<!--                                            <button  >Найти</button>-->
+                                        </div>
+
                                     </div>
                                     <div class="dataTable-container">
                                         <table class="table table-borderless datatable dataTable-table">
@@ -488,59 +530,7 @@
                                         </nav>
                                     </div>
                                 </div>
-                                <div class="row mb-3 align-items-center">
-                                    <label class="col-sm-4 col-form-label">Выберите вопрос для предпросмотра</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option value="0" selected>Выберите вопрос</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div id="singleQuestion">
-                                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
 
-                                            <div class="carousel-item active">
-                                                <img src="assets/img/slides-2.jpg" class="d-block w-100" alt="...">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img src="assets/img/slides-3.jpg" class="d-block w-100" alt="...">
-                                            </div>
-                                        </div>
-
-                                        <button class="carousel-control-prev" type="button"
-                                                data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                                data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-
-                                    </div>
-                                    <h5 class="card-title question-title">Пример заголовка вопроса</h5>
-                                    <ul class="list-group mb-3">
-                                        <li class="list-group-item"><i class="bi bi-star me-1 text-success"></i> Ответ 1
-                                        </li>
-                                        <li class="list-group-item"><i class="bi bi-collection me-1 text-primary"></i>
-                                            Ответ 2
-                                        </li>
-                                        <li class="list-group-item"><i class="bi bi-check-circle me-1 text-danger"></i>
-                                            Ответ 3
-                                        </li>
-                                        <li class="list-group-item"><i
-                                                class="bi bi-exclamation-octagon me-1 text-warning"></i> Ответ 4
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex justify-content-between" id="changeQuestion">
-                                        <button type="button" class="btn btn-secondary " data-bs-toggle="modal"
-                                                data-bs-target="#editQuestion">Изменить вопрос
-                                        </button>
-                                        <button type="button" class="btn btn-danger ">Удалить вопрос</button>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>

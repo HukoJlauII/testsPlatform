@@ -25,7 +25,7 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/tests")
+    @GetMapping("/test")
     public String showTestPage(Model model) {
         model.addAttribute("user", userService.getUserAuth());
         return "test";

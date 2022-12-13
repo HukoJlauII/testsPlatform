@@ -147,7 +147,7 @@ function showEditForm(response) {
             "                                                        <h5 class=\"card-title\">" + response.media[i].originalFileName.substring(0, 8) + "...</span></h5>\n" +
             "                                                        <div class=\"d-flex align-items-center justify-content-around\">\n" +
             "                                                            <div class=\"card-icon  d-flex align-items-center justify-content-center\">\n" +
-            "                                                                <img src=\"/image/" + response.media[i].id + "\" alt=\"Profile\" class=\"w-100 h-100\">\n" +
+            "                                                                <img src=\"/image/" + response.media[i].id + "\" alt=\"Profile\" class=\"w-100 h-100\" style='max-height: 400px'>\n" +
             "                                                            </div>\n" +
             "                                                        </div>\n" +
             "                                                    </div>\n" +
