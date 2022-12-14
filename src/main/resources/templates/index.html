@@ -184,8 +184,112 @@
 
                     <!-- Revenue Card -->
 
+                    <!-- Recent Sales -->
+                    <div class="col-12">
+                        <div class="card recent-sales overflow-auto">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Расписание <span></span></h5>
+
+                                <div class="dataTable-wrapper dataTable-loading no-footer searchable fixed-columns">
+                                    <div class="dataTable-top row g-3 mb-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <label for="day" class="form-label">День недели</label>
+                                            <select id="day" class="dataTable-selector">
+                                                <option value="0" selected="">Пн</option>
+                                                <option value="1">Вт</option>
+                                                <option value="2">Ср</option>
+                                                <option value="3">Чт</option>
+                                                <option value="4">Пт</option>
+                                                <option value="5">Сб</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="week" class="form-label">Неделя</label>
+                                            <select id="week" class="dataTable-selector">
+                                                <option value="0" selected="">Чет</option>
+                                                <option value="1">Нечет</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input class="dataTable-input"
+                                                   placeholder="Искать группу XXXX-XX-XX"
+                                                   type="text">
+                                            <button id="searchTimeTable" class="btn btn-dark"><i
+                                                    class="bi bi-search"></i></button>
+                                            <!--                                            <button  >Найти</button>-->
+                                        </div>
+
+                                    </div>
+                                    <div class="dataTable-container">
+                                        <table class="table table-borderless datatable dataTable-table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" data-sortable="" style="width: 10.8959%;"><a href="#"
+                                                                                                             class="dataTable-sorter">№</a>
+                                                </th>
+                                                <th scope="col" data-sortable="" style="width: 23.9709%;"><a href="#"
+                                                                                                             class="dataTable-sorter">Время</a>
+                                                </th>
+                                                <th scope="col" data-sortable="" style="width: 40.1937%;"><a href="#"
+                                                                                                             class="dataTable-sorter">Предмет</a>
+                                                </th>
+                                                <th scope="col" data-sortable="" style="width: 9.8063%;"><a href="#"
+                                                                                                            class="dataTable-sorter">Аудитория</a>
+                                                </th>
+                                                <th scope="col" data-sortable="" style="width: 15.1332%;"><a href="#"
+                                                                                                             class="dataTable-sorter">Преподаватель</a>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="table">
+                                            <!--                                            <tr>-->
+                                            <!--                                                <th scope="row"><a href="#">#2457</a></th>-->
+                                            <!--                                                <td>Brandon Jacob</td>-->
+                                            <!--                                                <td><a href="#" class="text-primary">At praesentium minu</a></td>-->
+                                            <!--                                                <td>$64</td>-->
+                                            <!--                                                <td><span class="badge bg-success">Approved</span></td>-->
+                                            <!--                                            </tr>-->
+                                            <!--                                            <tr>-->
+                                            <!--                                                <th scope="row"><a href="#">#2147</a></th>-->
+                                            <!--                                                <td>Bridie Kessler</td>-->
+                                            <!--                                                <td><a href="#" class="text-primary">Blanditiis dolor omnis-->
+                                            <!--                                                    similique</a></td>-->
+                                            <!--                                                <td>$47</td>-->
+                                            <!--                                                <td><span class="badge bg-warning">Pending</span></td>-->
+                                            <!--                                            </tr>-->
+                                            <!--                                            <tr>-->
+                                            <!--                                                <th scope="row"><a href="#">#2049</a></th>-->
+                                            <!--                                                <td>Ashleigh Langosh</td>-->
+                                            <!--                                                <td><a href="#" class="text-primary">At recusandae consectetur</a></td>-->
+                                            <!--                                                <td>$147</td>-->
+                                            <!--                                                <td><span class="badge bg-success">Approved</span></td>-->
+                                            <!--                                            </tr>-->
+                                            <!--                                            <tr>-->
+                                            <!--                                                <th scope="row"><a href="#">#2644</a></th>-->
+                                            <!--                                                <td>Angus Grady</td>-->
+                                            <!--                                                <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>-->
+                                            <!--                                                <td>$67</td>-->
+                                            <!--                                                <td><span class="badge bg-danger">Rejected</span></td>-->
+                                            <!--                                            </tr>-->
+                                            <!--                                            <tr>-->
+                                            <!--                                                <th scope="row"><a href="#">#2644</a></th>-->
+                                            <!--                                                <td>Raheem Lehner</td>-->
+                                            <!--                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>-->
+                                            <!--                                                <td>$165</td>-->
+                                            <!--                                                <td><span class="badge bg-success">Approved</span></td>-->
+                                            <!--                                            </tr>-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Reports -->
                     <!-- Customers Card -->
-                    <div class="col-xxl-12 col-xl-12">
+                    <div sec:authorize="hasRole('ROLE_TEACHER')" class="col-xxl-12 col-xl-12">
 
                         <div class="card info-card customers-card">
 
@@ -364,6 +468,29 @@
 
                     </div><!-- End Customers Card -->
 
+                    <div sec:authorize="hasRole('ROLE_STUDENT')" class="col-xxl-12 col-xl-12">
+
+                        <div id="studentTests" class="card info-card revenue-card">
+                            <div class="card-body"><h5 class="card-title">Меню <span>| Пройти тесты</span></h5></div>
+
+                            <!--                            <div class="card-body">-->
+                            <!--                                <h5 class="card-title">Меню <span>| Тесты</span></h5>-->
+                            <!--                                <div class="d-flex align-items-center mb-4">-->
+                            <!--                                    <div class="filter">-->
+                            <!--                                        <a class="icon" href="#"><i class="bi bi-minus"></i></a>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">-->
+                            <!--                                        <i class="bi bi-card-checklist"></i>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="ps-3">-->
+                            <!--                                        <h6>Посмотреть вопросы</h6>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+
+                            <!--                            </div>-->
+                        </div>
+
+                    </div><!-- End Customers Card -->
                     <!-- Reports -->
                     <div class="col-12" id="questions" style="display: none">
                         <div class="card">
@@ -378,7 +505,8 @@
                                     </div>
                                 </div>
                                 <div id="singleQuestion" class="row justify-content-around">
-                                    <div id="carouselExampleControls" class="carousel slide col-6" data-bs-ride="carousel">
+                                    <div id="carouselExampleControls" class="carousel slide col-6"
+                                         data-bs-ride="carousel">
                                         <div class="carousel-inner">
 
                                             <div class="carousel-item active">
@@ -426,115 +554,7 @@
 
                         </div>
                     </div>
-                    <!-- Recent Sales -->
-                    <div class="col-12">
-                        <div class="card recent-sales overflow-auto">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Расписание <span></span></h5>
-
-                                <div class="dataTable-wrapper dataTable-loading no-footer searchable fixed-columns">
-                                    <div class="dataTable-top row g-3 mb-3 align-items-center">
-                                        <div class="col-md-2">
-                                            <label for="day" class="form-label">День недели</label>
-                                            <select id="day" class="dataTable-selector">
-                                                <option value="0" selected="">Пн</option>
-                                                <option value="1">Вт</option>
-                                                <option value="2">Ср</option>
-                                                <option value="3">Чт</option>
-                                                <option value="4">Пт</option>
-                                                <option value="5">Сб</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="week" class="form-label">Неделя</label>
-                                            <select id="week" class="dataTable-selector">
-                                                <option value="0" selected="">Чет</option>
-                                                <option value="1">Нечет</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="dataTable-input"
-                                                                                 placeholder="Искать группу XXXX-XX-XX"
-                                                                                 type="text">
-                                            <button id="searchTimeTable"  class="btn btn-dark"><i class="bi bi-search"></i></button>
-<!--                                            <button  >Найти</button>-->
-                                        </div>
-
-                                    </div>
-                                    <div class="dataTable-container">
-                                        <table class="table table-borderless datatable dataTable-table">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col" data-sortable="" style="width: 10.8959%;"><a href="#"
-                                                                                                             class="dataTable-sorter">№</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 23.9709%;"><a href="#"
-                                                                                                             class="dataTable-sorter">Время</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 40.1937%;"><a href="#"
-                                                                                                             class="dataTable-sorter">Предмет</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 9.8063%;"><a href="#"
-                                                                                                            class="dataTable-sorter">Аудитория</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 15.1332%;"><a href="#"
-                                                                                                             class="dataTable-sorter">Преподаватель</a>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="table">
-<!--                                            <tr>-->
-<!--                                                <th scope="row"><a href="#">#2457</a></th>-->
-<!--                                                <td>Brandon Jacob</td>-->
-<!--                                                <td><a href="#" class="text-primary">At praesentium minu</a></td>-->
-<!--                                                <td>$64</td>-->
-<!--                                                <td><span class="badge bg-success">Approved</span></td>-->
-<!--                                            </tr>-->
-<!--                                            <tr>-->
-<!--                                                <th scope="row"><a href="#">#2147</a></th>-->
-<!--                                                <td>Bridie Kessler</td>-->
-<!--                                                <td><a href="#" class="text-primary">Blanditiis dolor omnis-->
-<!--                                                    similique</a></td>-->
-<!--                                                <td>$47</td>-->
-<!--                                                <td><span class="badge bg-warning">Pending</span></td>-->
-<!--                                            </tr>-->
-<!--                                            <tr>-->
-<!--                                                <th scope="row"><a href="#">#2049</a></th>-->
-<!--                                                <td>Ashleigh Langosh</td>-->
-<!--                                                <td><a href="#" class="text-primary">At recusandae consectetur</a></td>-->
-<!--                                                <td>$147</td>-->
-<!--                                                <td><span class="badge bg-success">Approved</span></td>-->
-<!--                                            </tr>-->
-<!--                                            <tr>-->
-<!--                                                <th scope="row"><a href="#">#2644</a></th>-->
-<!--                                                <td>Angus Grady</td>-->
-<!--                                                <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>-->
-<!--                                                <td>$67</td>-->
-<!--                                                <td><span class="badge bg-danger">Rejected</span></td>-->
-<!--                                            </tr>-->
-<!--                                            <tr>-->
-<!--                                                <th scope="row"><a href="#">#2644</a></th>-->
-<!--                                                <td>Raheem Lehner</td>-->
-<!--                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>-->
-<!--                                                <td>$165</td>-->
-<!--                                                <td><span class="badge bg-success">Approved</span></td>-->
-<!--                                            </tr>-->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="dataTable-bottom">
-                                        <div class="dataTable-info">Showing 1 to 5 of 5 entries</div>
-                                        <nav class="dataTable-pagination">
-                                            <ul class="dataTable-pagination-list"></ul>
-                                        </nav>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div><!-- End Reports -->
                     <div class="modal fade" id="editQuestion" tabindex="-1" aria-hidden="true"
                          style="display: none;">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -669,6 +689,7 @@
 <script src="assets/js/questions.js"></script>
 <script src="assets/js/tests.js"></script>
 <script src="/assets/js/timeTable.js"></script>
+<script src="/assets/js/testForStudent.js"></script>
 
 
 </body>

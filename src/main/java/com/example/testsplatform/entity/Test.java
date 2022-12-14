@@ -1,6 +1,7 @@
 package com.example.testsplatform.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +26,8 @@ public class Test {
 
     private String title;
 
-
+    @Transient
+    private boolean available = false;
 
     //    @RestResource(exported = false)
     @ManyToMany(targetEntity = Question.class, fetch = FetchType.LAZY)
@@ -34,7 +36,8 @@ public class Test {
             inverseJoinColumns = {@JoinColumn(name = "question_id")})
     private Set<Question> questions = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY,orphanRemoval = false,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnoreProperties(value = "previousTest", allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = false, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Test previousTest;
 
 }

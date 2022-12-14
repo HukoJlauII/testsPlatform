@@ -1,4 +1,4 @@
-let createQuestionModal=document.querySelector('#largeModal')
+let createQuestionModal = document.querySelector('#largeModal')
 let modal = createQuestionModal.querySelector('.modal-body')
 let inputs = modal.querySelectorAll('.form-control')
 let checks = modal.querySelectorAll('.form-check-input')
@@ -61,17 +61,14 @@ function createQuestion() {
         })
     })
     for (let i = 0; i < inputs.length; i++) {
-        if (i===1)
-        {
-            inputs[i].value=null
+        if (i === 1) {
+            inputs[i].value = null
+        } else {
+            inputs[i].value = ''
         }
-        else
-        {
-            inputs[i].value=''
-        }
-        inputs[i].classList.remove('is-invalid','is-valid')
+        inputs[i].classList.remove('is-invalid', 'is-valid')
     }
-    checks[0].checked=true
+    checks[0].checked = true
     cancelButton.click()
 }
 
