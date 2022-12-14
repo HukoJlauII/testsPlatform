@@ -19,7 +19,7 @@ import java.util.List;
 public class DownloadXLSX implements CommandLineRunner {
 
     private static final String URL = "https://www.mirea.ru/schedule/";
-    private static final String PATH = "src/main/java/com/example/testsplatform/util/XLSXFile/";
+    private static final String PATH = "src/main/resources/XLSXFile/";
 
 
     public static List<String> parseXML() {

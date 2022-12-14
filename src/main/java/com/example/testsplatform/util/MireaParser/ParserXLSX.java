@@ -31,7 +31,7 @@ public class ParserXLSX implements CommandLineRunner {
 //            FileInputStream fis = new FileInputStream("src/main/java/com/example/testsplatform/util/XLSXFile/1.xlsx");
 
             for (int i = 1; i < 5; i++) {
-                File file = new File("src/main/java/com/example/testsplatform/util/XLSXFile/" + i + ".xlsx");
+                File file = new File("src/main/resources/XLSXFile/" + i + ".xlsx");
                 OPCPackage pkg = OPCPackage.open(file);
                 XSSFWorkbook book = new XSSFWorkbook(pkg);
                 XSSFSheet sheet = book.getSheetAt(0);
@@ -83,7 +83,7 @@ public class ParserXLSX implements CommandLineRunner {
                 XSSFCell cell4 = sheet.getRow(rw).getCell(col + 3);
 
                 Map<String, String> subject = new HashMap<>();
-                subject.put("title", printCell(cell).replaceAll("\n", ""));
+                subject.put("title", printCell(cell).replaceAll("\n", " "));
                 subject.put("type", printCell(cell2).replaceAll("\n", ""));
                 subject.put("teacher", printCell(cell3).replaceAll("\n", ""));
                 subject.put("audit", printCell(cell4).replaceAll("\n", ""));
