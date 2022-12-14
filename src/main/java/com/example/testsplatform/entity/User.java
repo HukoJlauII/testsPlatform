@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class User implements UserDetails {
     @NotBlank(message = "Поле не может быть пустым")
     @Size(min = 3, message = "Никнейм не может содержать менее 3-ёх символов")
     @Size(max = 20, message = "Слишком длинный никнейм")
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9-_.]{1,20}$", message = "Неверный формат никнейма")
     @Column(name = "username", unique = true, length = 20)
     private String username;
 
@@ -63,11 +65,12 @@ public class User implements UserDetails {
     private String email;
 
 
-    @NotBlank(message = "Поле не должно быть путсым")
+    @NotBlank(message = "Поле не должно быть пустым")
+    @Pattern(regexp = "^[A-ZА-я][a-zа-я]{2,20}$", message = "Имя должно начинаться с заглавной буквы и состоять только из букв")
     @Column(name = "name")
     private String name;
 
-
+    @Pattern(regexp = "^[A-ZА-я][a-zа-я]{2,20}$", message = "Фамилия должна начинаться с заглавной буквы и состоять только из букв")
     @NotBlank(message = "Поле не должно быть пустым")
     @Column(name = "surname")
     private String surname;

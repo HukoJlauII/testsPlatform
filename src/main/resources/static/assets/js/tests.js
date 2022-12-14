@@ -29,7 +29,7 @@ function createTest() {
     for (let i = 0; i < checks.length; i++) {
         if (checks[i].checked) {
             questions.push(
-                "http://localhost:8080/tests/" + checks[i].value
+                "http://localhost:8080/questions/" + checks[i].value
             )
         }
     }
@@ -93,7 +93,7 @@ function checkCorrectTest() {
 
 function getAllQuestionsPreview() {
     var settings = {
-        "url": "http://localhost:8080/questions?projection=questionPreview",
+        "url": "http://localhost:8080/questions?projection=questionPreview?size=100",
         "method": "GET",
         "timeout": 0,
     };
@@ -118,7 +118,7 @@ function getAllQuestionsPreview() {
 
 function getAllTestsPreview() {
     var settings = {
-        "url": "http://localhost:8080/tests?projection=testPreview",
+        "url": "http://localhost:8080/tests?projection=testPreview&size=100",
         "method": "GET",
         "timeout": 0,
     };

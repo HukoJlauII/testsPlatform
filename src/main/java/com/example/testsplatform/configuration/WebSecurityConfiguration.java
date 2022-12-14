@@ -25,8 +25,14 @@ public class WebSecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeRequests()
-                .antMatchers("/login*", "/register", "/users**")
+                .antMatchers("/login*", "/users")
                 .permitAll()
+                .antMatchers("/register")
+                .not().fullyAuthenticated()
+                .antMatchers("/test")
+                .hasRole("TEACHER")
+                .antMatchers("/test/**")
+                .hasRole("STUDENT")
                 .anyRequest()
                 .authenticated();
         http

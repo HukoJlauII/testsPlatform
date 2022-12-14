@@ -5,8 +5,11 @@ import com.example.testsplatform.entity.User;
 import com.example.testsplatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @SessionAttributes("user")
@@ -25,7 +28,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String validateRegister(@ModelAttribute("user") User user, @RequestParam("roleName") Role role, BindingResult bindingResult) {
+    public String validateRegister(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model, @RequestParam("roleName") Role role) {
 
         if (bindingResult.hasErrors()) {
             return "/pages-register";

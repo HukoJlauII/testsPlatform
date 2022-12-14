@@ -1,7 +1,9 @@
 package com.example.testsplatform.entity;
 
 
+import com.example.testsplatform.views.TestView;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,14 +21,18 @@ import java.util.Set;
 @ToString
 public class Test {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(TestView.TestForMainPage.class)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @JsonView(TestView.TestForMainPage.class)
     private String title;
 
     @Transient
+    @JsonView(TestView.TestForMainPage.class)
     private boolean available = false;
 
     //    @RestResource(exported = false)
@@ -37,6 +43,7 @@ public class Test {
     private Set<Question> questions = new HashSet<>();
 
     @JsonIgnoreProperties(value = "previousTest", allowSetters = true)
+    @JsonView(TestView.TestForMainPage.class)
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = false, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Test previousTest;
 

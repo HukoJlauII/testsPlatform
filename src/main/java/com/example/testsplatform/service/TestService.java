@@ -39,9 +39,6 @@ public class TestService {
         return testRepository.findByPreviousTest(previousTest);
     }
 
-    public List<Test> findAll() {
-        return testRepository.findAll();
-    }
 
     public List<Test> findStudentTestsByUser(User user) {
         return studentTestRepository.findStudentTestsByUser(user);
@@ -59,12 +56,13 @@ public class TestService {
     public List<Test> checkAvailableTest() {
         List<Test> tests = findTestByDifficulty(null);
         List<Test> studentTests = findStudentTestsByUser(userService.getUserAuth());
-        for (Test test : tests) {
-            if (test.getPreviousTest() == null)
+        tests.forEach(test -> {
+            if (test.getPreviousTest() == null) test.setAvailable(true);
+            if (studentTests.contains(test)) {
                 test.setAvailable(true);
-            if (studentTests.contains(test))
-                test.setAvailable(true);
-        }
+            }
+        });
+
         return tests;
     }
 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Pages / Register - MyTest</title>
+    <title>Регистрация - MyTest</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -55,8 +55,8 @@
                             <div class="card-body">
 
                                 <div class="pt-4 pb-2">
-                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                                    <p class="text-center small">Enter your personal details to create account</p>
+                                    <h5 class="card-title text-center pb-0 fs-4">Создайте аккаунт</h5>
+                                    <p class="text-center small">Введите данные для создания аккаунта</p>
                                 </div>
 
                                 <form class="row g-3 needs-validation" action="/register" method="post"
@@ -65,97 +65,88 @@
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="roleName"
-                                                   value="ROLE_TEACHER" id="roleName">
-                                            <label class="form-check-label" for="roleName">Teacher</label>
+                                                   value="ROLE_TEACHER" id="roleName" >
+                                            <label class="form-check-label" for="roleName">Преподаватель</label>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="roleName"
-                                                   value="ROLE_STUDENT" id="roleName">
-                                            <label class="form-check-label" for="roleName">Student</label>
+                                                   value="ROLE_STUDENT" id="roleName" selected>
+                                            <label class="form-check-label" for="roleName">Студент</label>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourName" class="form-label">Your Name</label>
+                                        <label for="yourName" class="form-label">Ваше имя</label>
                                         <input type="text" name="name" class="form-control" id="yourName"
-                                               th:field="*{name}" required
+                                               th:field="*{name}"
                                                th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-valid'">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"
-                                             th:text="${#fields.errors('name').get(0) }">Please, enter your name!
+                                             th:text="${#fields.errors('name').get(0) }">Пожалуйста, введите ваше имя
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourSurname" class="form-label">Your Surname</label>
+                                        <label for="yourSurname" class="form-label">Ваша фамилия</label>
                                         <input type="text" name="name" class="form-control" id="yourSurname"
-                                               th:field="*{surname}" required
+                                               th:field="*{surname}"
                                                th:classappend="${#fields.hasErrors('surname')} ? 'is-invalid' : 'is-valid'">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('surname')}"
-                                             th:text="${#fields.errors('surname').get(0) }">Please, enter your surname!
+                                             th:text="${#fields.errors('surname').get(0) }">Пожалуйста, введите фамилию
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourEmail" class="form-label">Your Email</label>
+                                        <label for="yourEmail" class="form-label">Ваш email</label>
                                         <input type="email" name="email" class="form-control" id="yourEmail"
-                                               th:field="*{email}" required
+                                               th:field="*{email}"
                                                th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : 'is-valid'">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}"
-                                             th:text="${#fields.errors('email').get(0) }">Please enter a valid Email
-                                            adddress!
+                                             th:text="${#fields.errors('email').get(0) }">Пожалуйста,введите существующий адрес email
+
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourUsername" class="form-label">Username</label>
+                                        <label for="yourUsername" class="form-label">Никнейм</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                                             <input type="text" name="username" class="form-control" id="yourUsername"
-                                                   th:field="*{username}" required
+                                                   th:field="*{username}"
                                                    th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : 'is-valid'">
                                             <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}"
-                                                 th:text="${#fields.errors('username').get(0) }">Please choose a
-                                                username.
+                                                 th:text="${#fields.errors('username').get(0) }">Пожалуйста, введите никнейм
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <label for="yourPassword" class="form-label">Пароль</label>
                                         <input type="password" name="password" class="form-control" id="yourPassword"
-                                               th:field="*{password}" required
+                                               th:field="*{password}"
                                                th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : 'is-valid'">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}"
-                                             th:text="${#fields.errors('password').get(0) }">Please enter your password!
+                                             th:text="${#fields.errors('password').get(0) }">Введите пароль
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourPasswordConfirm" class="form-label">Password Confirm</label>
+                                        <label for="yourPasswordConfirm" class="form-label">Подтверждение пароля</label>
                                         <input type="password" name="password" class="form-control"
-                                               id="yourPasswordConfirm" th:field="*{passwordConfirm}" required
+                                               id="yourPasswordConfirm" th:field="*{passwordConfirm}"
                                                th:classappend="${#fields.hasErrors('passwordConfirm')} ? 'is-invalid' : 'is-valid'">
                                         <div class="invalid-feedback" th:if="${#fields.hasErrors('passwordConfirm')}"
-                                             th:text="${#fields.errors('passwordConfirm').get(0) }">Please enter your
-                                            password!
+                                             th:text="${#fields.errors('passwordConfirm').get(0) }">Введите пароль
                                         </div>
                                     </div>
 
-                                    <!--                    <div class="col-12">-->
-                                    <!--                      <div class="form-check">-->
-                                    <!--                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>-->
-                                    <!--                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>-->
-                                    <!--                        <div class="invalid-feedback">You must agree before submitting.</div>-->
-                                    <!--                      </div>-->
-                                    <!--                    </div>-->
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                        <button class="btn btn-primary w-100" type="submit">Создать аккаунт</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Already have an account? <a href="/login">Log in</a></p>
+                                        <p class="small mb-0">Уже зарегистрированы? <a href="/login">Войти</a></p>
                                     </div>
                                 </form>
 
@@ -163,11 +154,7 @@
                         </div>
 
                         <div class="credits">
-                            <!-- All the links in the footer should remain intact. -->
-                            <!-- You can delete the links only if you purchased the pro version. -->
-                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                            Разработчик <a href="https://github.com/HukoJlauII">HukoJlauII</a>
                         </div>
 
                     </div>

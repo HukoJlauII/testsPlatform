@@ -4,6 +4,6 @@ public class QuestionView {
     public static class QuestionPreview {
     }
 
-    public static class FullQuestion {
+    public static class FullQuestion extends QuestionPreview {
     }
 }

@@ -3,7 +3,7 @@ console.log(testMenu)
 let testSelect = testMenu.querySelector('.form-select')
 window.onload = function () {
     var settings = {
-        "url": "http://localhost:8080/tests?projection=testPreview",
+        "url": "http://localhost:8080/tests?projection=testPreview&size=100",
         "method": "GET",
         "timeout": 0,
     };
@@ -23,7 +23,7 @@ testSelect.addEventListener('change', function () {
     console.log(selectedOption)
     if (selectedOption.value !== "0") {
         var settings = {
-            "url": "http://localhost:8080/tests/" + selectedOption.value + "?projection=fullTest",
+            "url": "http://localhost:8080/tests/" + selectedOption.value + "?projection=fullTest&size=100",
             "method": "GET",
             "timeout": 0,
         };
@@ -184,23 +184,3 @@ function showQuestionInTest(question) {
     document.querySelector('#questionArea').appendChild(questionEl)
 }
 
-// "<div class=\"card-body singleQuestion\">\n" +
-// "                                <h5 class=\"card-title mb-3\">Пример заголовка вопроса</h5>\n" +
-// "                                <div class=\"row justify-content-around \">\n" +
-// "\n" +
-// "                                    <div id=\"carouselExampleControls\" class=\"carousel slide col-6 mb-3\"\n" +
-// "                                         data-bs-ride=\"carousel\">\n" +
-// "                                        <div class=\"carousel-inner\">\n" +
-// "                                        </div>\n" +
-// "\n" +
-// "                                        <button class=\"carousel-control-prev\" type=\"button\"\n" +
-// "                                                data-bs-target=\"#carouselExampleControls\" data-bs-slide=\"prev\">\n" +
-// "                                            <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\n" +
-// "                                            <span class=\"visually-hidden\">Previous</span>\n" +
-// "                                        </button>\n" +
-// "                                        <button class=\"carousel-control-next\" type=\"button\"\n" +
-// "                                                data-bs-target=\"#carouselExampleControls\" data-bs-slide=\"next\">\n" +
-// "                                            <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\n" +
-// "                                            <span class=\"visually-hidden\">Next</span>\n" +
-// "                                        </button>\n" +
-// "                                    </div>\n" +
