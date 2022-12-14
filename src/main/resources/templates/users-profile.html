@@ -173,7 +173,8 @@
                                 'https://bootdey.com/img/Content/avatar/avatar6.png'}" alt="Profile"
                              class="rounded-circle">
                         <h2 th:text="${user.name}+' '+${user.surname}"></h2>
-                        <h3 th:text="'Зарегестрирован с '+${#temporals.format(user.registrationDate,'dd.MM.yyyy')}">r</h3>
+                        <h3 th:text="'Зарегестрирован с '+${#temporals.format(user.registrationDate,'dd.MM.yyyy')}">
+                            r</h3>
                     </div>
                 </div>
 

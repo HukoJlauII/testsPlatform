@@ -18,6 +18,7 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
+
     @PostMapping(value = "/create")
     public Question createQuestion(@RequestParam("question") String jsonString, @RequestParam(value = "file", required = false) List<MultipartFile> multipartFiles) throws IOException {
         Question question = new ObjectMapper().readValue(jsonString, Question.class);
@@ -36,4 +37,6 @@ public class QuestionController {
     public List<Question> showAllQuestions() {
         return questionService.findAll();
     }
+
+
 }

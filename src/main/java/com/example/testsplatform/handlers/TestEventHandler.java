@@ -16,11 +16,11 @@ public class TestEventHandler {
     @HandleBeforeDelete
     public void changePreviousTest(Test test) {
 
-            List<Test> tests = testService.findByPreviousTest(test);
-            tests.forEach(t -> {
-                t.setPreviousTest(test.getPreviousTest());
-            });
-            testService.saveAll(tests);
+        List<Test> tests = testService.findByPreviousTest(test);
+        tests.forEach(t -> {
+            t.setPreviousTest(test.getPreviousTest());
+        });
+        testService.saveAll(tests);
 
     }
 

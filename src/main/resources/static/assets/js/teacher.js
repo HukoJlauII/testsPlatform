@@ -42,25 +42,24 @@ function showTest(response) {
         console.log(questions[i])
         showQuestionInTest(questions[i])
     }
-    document.querySelector('#questionArea').innerHTML+="<div class=\"d-flex justify-content-around\" id=\"deleteTest\">\n" +
+    document.querySelector('#questionArea').innerHTML += "<div class=\"d-flex justify-content-around\" id=\"deleteTest\">\n" +
         "        <button type=\"button\" class=\"btn btn-danger \" data-bs-toggle=\"modal\"\n" +
         "                                                data-bs-target=\"#deleteConfirm\">Удалить тест</button>\n" +
         "    </div>"
 
-    let deleteButton=document.querySelector('#deleteConfirm').querySelector('.btn-danger')
-    let newNode=deleteButton.cloneNode()
-    newNode.innerHTML='Удалить тест'
+    let deleteButton = document.querySelector('#deleteConfirm').querySelector('.btn-danger')
+    let newNode = deleteButton.cloneNode()
+    newNode.innerHTML = 'Удалить тест'
     deleteButton.parentNode.appendChild(newNode)
     deleteButton.parentNode.removeChild(deleteButton)
-    newNode.addEventListener('click',function ()
-    {
+    newNode.addEventListener('click', function () {
         var settings = {
             "url": "http://localhost:8080/tests/" + response.id,
             "method": "DELETE",
             "timeout": 0,
         };
         $.ajax(settings).done(function (response) {
-            document.querySelector('#questionArea').innerHTML="<div class=\"card-body\">\n" +
+            document.querySelector('#questionArea').innerHTML = "<div class=\"card-body\">\n" +
                 "                                <h5 class=\"card-title mb-3\">Пример заголовка вопроса</h5>\n" +
                 "                                <div class=\"row justify-content-around singleQuestion\">\n" +
                 "\n" +
