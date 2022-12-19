@@ -43,23 +43,7 @@ function createTest() {
         questions: questions,
         previousTest: previousTest
     }
-    // for (let i = 0; i < checks.length; i++) {
-    //     if (checks[i].checked) {
-    //         questions.push(
-    //             {id:checks[i].value}
-    //         )
-    //     }
-    // }
-    // let selectedTest = selectArea.options[selectArea.selectedIndex]
-    //
-    //
-    // let previousTest = selectedTest === '0' ? null : {id:selectedTest.value}
-    //
-    // let test = {
-    //     title: title.value,
-    //     questions: questions,
-    //     previousTest: previousTest
-    // }
+
     console.log(test)
     var settings = {
         "url": "http://localhost:8080/tests",

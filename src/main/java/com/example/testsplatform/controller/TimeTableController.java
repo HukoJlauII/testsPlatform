@@ -6,10 +6,15 @@ import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Controller
 public class TimeTableController {
@@ -19,17 +24,16 @@ public class TimeTableController {
 
     @PostMapping("/getTimeTable")
     @ResponseBody
-    public Object getTimeTable(@RequestBody String jsonString) throws ParseException {
+    public ResponseEntity<Object> getTimeTable(@RequestBody String jsonString) throws ParseException {
         JSONObject json = (JSONObject) new JSONParser().parse(jsonString);
-//        int k = timeTableService.countGroupByPrefix(json.get("searchLine").toString().split("-")[0],json.get("searchLine").toString().split("-")[2]);
-//        int i = Integer.parseInt(json.get("searchLine").toString().split("-")[1]);
-//
-//        if(i>k){
-//            return new Object();
-//        }
 
-        return ParserXLSX.groups.get((String) json.get("searchLine")).
-                get((Integer) json.get("week")).
-                get((Integer) json.get("day"));
+        if (ParserXLSX.groups.containsKey((String) json.get("searchLine")))
+        {
+            return new ResponseEntity<>(ParserXLSX.groups.get((String) json.get("searchLine")).
+                    get((Integer) json.get("week")).
+                    get((Integer) json.get("day")), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(Collections.emptyList(), HttpStatus.NO_CONTENT);
+
     }
 }

@@ -22,7 +22,7 @@ function createStudentTestBlock(data) {
     div.innerHTML = "" +
         "                                <div class=\"d-flex align-items-center mb-2 mt-2\">\n" +
         "                                    <div class=\"card-icon rounded-circle d-flex align-items-center justify-content-center\" style=\"" + (!data["available"] ? "color: #bcbebf;" : "") + "\">\n" +
-        "                                    " + (data["available"] ? ("<a class=\"icon\" href=\"" + "/test/" + data["id"] + "\"> <i class=\"bi bi-card-checklist\"></i></a>\n")
+        "                                    " + (data["available"] ? ("<a class=\"icon\" href=\"" + "/student/test/" + data["id"] + "\"> <i class=\"bi bi-card-checklist\"></i></a>\n")
             : ("<i class=\"bi bi-card-checklist\"></i> ")) +
         "                                    </div>\n" +
         "                                    <div class=\"ps-3\">\n" +

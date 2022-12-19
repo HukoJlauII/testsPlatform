@@ -27,6 +27,11 @@ public class TestService {
         return testRepository.save(test);
     }
 
+    public Test findTestById(Long id)
+    {
+        return testRepository.findById(id).orElse(null);
+    }
+
     public List<Test> saveAll(List<Test> tests) {
         return testRepository.saveAll(tests);
     }

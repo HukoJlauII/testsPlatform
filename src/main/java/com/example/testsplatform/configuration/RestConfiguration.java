@@ -8,6 +8,7 @@ import com.example.testsplatform.handlers.MediaEventHandler;
 import com.example.testsplatform.handlers.QuestionEventHandler;
 import com.example.testsplatform.handlers.TestEventHandler;
 import com.example.testsplatform.views.QuestionProjection;
+import com.example.testsplatform.views.QuestionWithoutAnswerProjection;
 import com.example.testsplatform.views.TestProjection;
 import com.example.testsplatform.views.TestWithQuestionProjection;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +42,7 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         config.exposeIdsFor(User.class);
         config.exposeIdsFor(Test.class);
         config.exposeIdsFor(Question.class);
-        config.getProjectionConfiguration().addProjection(QuestionProjection.class);
+        config.getProjectionConfiguration().addProjection(QuestionProjection.class).addProjection(QuestionWithoutAnswerProjection.class);
         config.getProjectionConfiguration().addProjection(TestProjection.class).addProjection(TestWithQuestionProjection.class);
     }
 }
