@@ -157,6 +157,18 @@
                 <span>Тесты</span>
             </a>
         </li>
+        <li sec:authorize="hasRole('ROLE_TEACHER')" class="nav-item">
+            <a class="nav-link collapsed" href="/test">
+                <i class="bi bi-people"></i>
+                <span>Ученики</span>
+            </a>
+        </li>
+        <li  class="nav-item">
+            <a class="nav-link collapsed" href="/test">
+                <i class="bi bi-tablet"></i>
+                <span>Статистика</span>
+            </a>
+        </li>
     </ul>
 
 </aside><!-- End Sidebar-->
@@ -180,122 +192,10 @@
             <div class="col-lg-12">
                 <div class="row">
 
-                    <!-- Sales Card -->
-
-                    <!-- Revenue Card -->
-
-                    <!-- Recent Sales -->
-                    <div class="col-12">
-                        <div class="card recent-sales overflow-auto">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Расписание <span></span></h5>
-
-                                <div class="dataTable-wrapper dataTable-loading no-footer searchable fixed-columns">
-                                    <div class="dataTable-top row g-3 mb-3 align-items-center">
-                                        <div class="col-md-2">
-                                            <label for="day" class="form-label">День недели</label>
-                                            <select id="day" class="dataTable-selector">
-                                                <option value="0" selected="">Пн</option>
-                                                <option value="1">Вт</option>
-                                                <option value="2">Ср</option>
-                                                <option value="3">Чт</option>
-                                                <option value="4">Пт</option>
-                                                <option value="5">Сб</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="week" class="form-label">Неделя</label>
-                                            <select id="week" class="dataTable-selector">
-                                                <option value="0" selected="">Чет</option>
-                                                <option value="1">Нечет</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="dataTable-input"
-                                                   placeholder="Искать группу XXXX-XX-XX"
-                                                   type="text">
-                                            <button id="searchTimeTable" class="btn btn-dark"><i
-                                                    class="bi bi-search"></i></button>
-                                            <!--                                            <button  >Найти</button>-->
-                                        </div>
-
-                                    </div>
-                                    <div class="dataTable-container">
-                                        <table class="table table-borderless datatable dataTable-table">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col" data-sortable="" style="width: 10.8959%;"><a href="#"
-                                                                                                           >№</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 23.9709%;"><a href="#"
-                                                                                                             >Время</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 40.1937%;"><a href="#"
-                                                                                                             >Предмет</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 9.8063%;"><a href="#"
-                                                                                                            >Тип</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 9.8063%;"><a href="#"
-                                                                                                            >Аудитория</a>
-                                                </th>
-                                                <th scope="col" data-sortable="" style="width: 15.1332%;"><a href="#"
-                                                                                                             >Преподаватель</a>
-                                                </th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="table">
-                                            <!--                                            <tr>-->
-                                            <!--                                                <th scope="row"><a href="#">#2457</a></th>-->
-                                            <!--                                                <td>Brandon Jacob</td>-->
-                                            <!--                                                <td><a href="#" class="text-primary">At praesentium minu</a></td>-->
-                                            <!--                                                <td>$64</td>-->
-                                            <!--                                                <td><span class="badge bg-success">Approved</span></td>-->
-                                            <!--                                            </tr>-->
-                                            <!--                                            <tr>-->
-                                            <!--                                                <th scope="row"><a href="#">#2147</a></th>-->
-                                            <!--                                                <td>Bridie Kessler</td>-->
-                                            <!--                                                <td><a href="#" class="text-primary">Blanditiis dolor omnis-->
-                                            <!--                                                    similique</a></td>-->
-                                            <!--                                                <td>$47</td>-->
-                                            <!--                                                <td><span class="badge bg-warning">Pending</span></td>-->
-                                            <!--                                            </tr>-->
-                                            <!--                                            <tr>-->
-                                            <!--                                                <th scope="row"><a href="#">#2049</a></th>-->
-                                            <!--                                                <td>Ashleigh Langosh</td>-->
-                                            <!--                                                <td><a href="#" class="text-primary">At recusandae consectetur</a></td>-->
-                                            <!--                                                <td>$147</td>-->
-                                            <!--                                                <td><span class="badge bg-success">Approved</span></td>-->
-                                            <!--                                            </tr>-->
-                                            <!--                                            <tr>-->
-                                            <!--                                                <th scope="row"><a href="#">#2644</a></th>-->
-                                            <!--                                                <td>Angus Grady</td>-->
-                                            <!--                                                <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>-->
-                                            <!--                                                <td>$67</td>-->
-                                            <!--                                                <td><span class="badge bg-danger">Rejected</span></td>-->
-                                            <!--                                            </tr>-->
-                                            <!--                                            <tr>-->
-                                            <!--                                                <th scope="row"><a href="#">#2644</a></th>-->
-                                            <!--                                                <td>Raheem Lehner</td>-->
-                                            <!--                                                <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>-->
-                                            <!--                                                <td>$165</td>-->
-                                            <!--                                                <td><span class="badge bg-success">Approved</span></td>-->
-                                            <!--                                            </tr>-->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div><!-- End Reports -->
                     <!-- Customers Card -->
                     <div sec:authorize="hasRole('ROLE_TEACHER')" class="col-xxl-12 col-xl-12">
 
                         <div class="card info-card customers-card">
-
 
                             <div class="card-body">
                                 <h5 class="card-title">Меню <span>| Тесты</span></h5>
