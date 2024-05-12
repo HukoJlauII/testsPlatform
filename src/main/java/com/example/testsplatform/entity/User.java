@@ -17,16 +17,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users", schema = "jpa")
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @ToString
 public class User implements UserDetails {
     @Id
@@ -52,11 +49,20 @@ public class User implements UserDetails {
     @JsonIgnore
     private String passwordConfirm;
 
+    @Transient
+    private List<Test> passedTests = new ArrayList<>();
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     @JsonIgnore
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_achievement",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "achievement_id")})
+    private List<Achievement> achievements = new ArrayList<>();
 
 
     @Email(message = "Поле должно иметь формат эл.почты")

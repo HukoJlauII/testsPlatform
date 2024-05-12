@@ -6,12 +6,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Main Page - MyTest</title>
+    <title>Main Page - TestIO</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/logo.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <link rel="stylesheet" href="/assets/css/chat.css">
 
@@ -57,7 +57,7 @@
     <div class="d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
             <img src="/assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">MyTest</span>
+            <span class="d-none d-lg-block">TestIO</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -138,7 +138,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/">
+            <a class="nav-link " href="/">
                 <i class="bi bi-grid"></i>
                 <span>Главная</span>
             </a>
@@ -152,9 +152,21 @@
         </li>
 
         <li sec:authorize="hasRole('ROLE_TEACHER')" class="nav-item">
-            <a class="nav-link " href="/test">
+            <a class="nav-link" href="/test">
                 <i class="bi bi-card-checklist"></i>
                 <span>Тесты</span>
+            </a>
+        </li>
+        <li sec:authorize="hasRole('ROLE_TEACHER')" class="nav-item">
+            <a class="nav-link collapsed" href="/students">
+                <i class="bi bi-people"></i>
+                <span>Ученики</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/stats">
+                <i class="bi bi-tablet"></i>
+                <span>Статистика</span>
             </a>
         </li>
     </ul>
@@ -300,7 +312,7 @@
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>MyTest</span></strong>. Все права (не) защищены
+        &copy; Copyright <strong><span>TestIO</span></strong>. Все права (не) защищены
     </div>
     <div class="credits">
         Разработчик <a href="https://github.com/HukoJlauII">HukoJlauII</a>

@@ -47,4 +47,13 @@ public class Test {
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = false, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Test previousTest;
 
+    @Transient
+    private int peopleStarted;
+
+    @Transient
+    private long peoplePassed;
+
+    @Transient
+    private double passPercentage;
+
 }

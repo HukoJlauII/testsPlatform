@@ -28,9 +28,8 @@ public class TestController {
 
     @GetMapping("/test/{id}")
     public String showTestPage(Model model, @PathVariable("id") Long id) {
-        Test test=testService.findTestById(id);
-        if (test==null)
-        {
+        Test test = testService.findTestById(id);
+        if (test == null) {
             return "pages-error-404";
         }
         model.addAttribute("user", userService.getUserAuth());
@@ -44,4 +43,6 @@ public class TestController {
     public List<Test> test() {
         return testService.checkAvailableTest();
     }
+
+
 }

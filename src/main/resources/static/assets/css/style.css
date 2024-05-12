@@ -479,6 +479,10 @@ h6 {
     color: #006600FF;
 }
 
+.avatar {
+    max-height: 36px;
+}
+
 /*--------------------------------------------------------------
 # Header Nav
 --------------------------------------------------------------*/
@@ -1231,13 +1235,13 @@ h6 {
 }
 
 .error-404 .btn {
-    background: #51678f;
+    background: #0bae0b;
     color: #fff;
     padding: 8px 30px;
 }
 
 .error-404 .btn:hover {
-    background: #3e4f6f;
+    background: #006600FF;
 }
 
 @media (min-width: 992px) {

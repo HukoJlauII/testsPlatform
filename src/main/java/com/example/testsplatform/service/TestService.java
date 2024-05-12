@@ -1,6 +1,7 @@
 package com.example.testsplatform.service;
 
 import com.example.testsplatform.entity.Question;
+import com.example.testsplatform.entity.StudentTest;
 import com.example.testsplatform.entity.Test;
 import com.example.testsplatform.entity.User;
 import com.example.testsplatform.repository.StudentTestRepository;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class TestService {
@@ -27,8 +31,7 @@ public class TestService {
         return testRepository.save(test);
     }
 
-    public Test findTestById(Long id)
-    {
+    public Test findTestById(Long id) {
         return testRepository.findById(id).orElse(null);
     }
 
@@ -70,4 +73,40 @@ public class TestService {
 
         return tests;
     }
+
+    public List<Test> getPopularTests() {
+        return getStudentTestByTest()
+                .stream()
+                .sorted(Comparator.comparing(Test::getPeopleStarted))
+                .toList();
+    }
+
+    public List<Test> getHardestTest() {
+        return getStudentTestByTest()
+                .stream()
+                .sorted(Comparator.comparing(test -> test.getPeoplePassed() / test.getPeopleStarted()))
+                .toList();
+    }
+
+    public List<Test> getStudentTestByTest() {
+        return studentTestRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(StudentTest::getTest))
+                .entrySet()
+                .stream()
+                .peek((testListEntry -> {
+                    Test test = testListEntry.getKey();
+                    int peopleStarted = testListEntry.getValue().size();
+                    test.setPeopleStarted(peopleStarted);
+                    long peoplePassed = testListEntry.getValue()
+                            .stream()
+                            .filter(StudentTest::isPassed)
+                            .count();
+                    test.setPeoplePassed(peoplePassed);
+                    test.setPassPercentage(peopleStarted != 0 ? Math.round((double) peoplePassed / peopleStarted * 10000.0) / 100.0d : 0d);
+                }))
+                .map(Map.Entry::getKey)
+                .toList();
+    }
 }
+

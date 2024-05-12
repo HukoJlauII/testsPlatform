@@ -2,8 +2,6 @@ package com.example.testsplatform.util.MireaParser;
 
 import org.jsoup.Jsoup;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -14,8 +12,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Order(2)
+
 public class DownloadXLSX implements CommandLineRunner {
 
     private static final String URL = "https://www.mirea.ru/schedule/";

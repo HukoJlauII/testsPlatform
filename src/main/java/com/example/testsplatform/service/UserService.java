@@ -2,6 +2,7 @@ package com.example.testsplatform.service;
 
 import com.example.testsplatform.entity.Role;
 import com.example.testsplatform.entity.User;
+import com.example.testsplatform.repository.StudentTestRepository;
 import com.example.testsplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
+
+import static com.example.testsplatform.entity.Role.ROLE_STUDENT;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -26,6 +31,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private StudentTestRepository studentTestRepository;
 
 
     public User save(User user) {
@@ -124,6 +132,20 @@ public class UserService implements UserDetailsService {
 
         }
         return "redirect:/profile#profile-change-password";
+    }
+
+    public List<User> findAllStudents() {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getRoles().contains(ROLE_STUDENT))
+                .peek(user -> user.setPassedTests(studentTestRepository.findStudentTestsByUser(user)))
+                .toList();
+    }
+
+    public List<User> getTopActiveUsers() {
+        return findAllStudents()
+                .stream()
+                .sorted(Comparator.comparing(user -> user.getPassedTests().size()))
+                .limit(5).toList();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.testsplatform.controller;
 import com.example.testsplatform.entity.User;
 import com.example.testsplatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -55,5 +56,12 @@ public class UserController {
         User user = userService.getUserAuth();
         return userService.changePassword(user, currentPassword, newPassword, passwordConfirm, redirectAttributes);
 
+    }
+
+    @GetMapping("/students")
+    public String showStudents(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
+        model.addAttribute("students", userService.findAllStudents());
+        return "studentsPage";
     }
 }
